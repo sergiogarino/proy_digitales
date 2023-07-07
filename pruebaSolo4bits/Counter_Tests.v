@@ -16,8 +16,7 @@ module Test_bench(
 	output reg clk, enb, rst,
 	output reg modo,
 	output reg [3:0] data,
-	output reg [3:0] Q,
-    input wire [1:0] count
+	input wire [3:0] Q
 	);
 	
 	//Defino el reloj 
@@ -46,8 +45,8 @@ module Test_bench(
         #10 rst = 1;
         #10 rst = 0;
         #10 rst = 1;
-        #10 rst = 0;
-		#50 enb = 0;        	
+
+		#50 enb = 0;
 		
 	    // Prueba 4 - Carga paralela		
 		modo    = 1;
