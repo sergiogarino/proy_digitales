@@ -12,7 +12,7 @@
  * Descripción: 
  * Test bench para el módulo Counter
  */
-module Test_bench(
+module Counter_Tests(
 	output reg clk, enb,
 	output reg modo,
 	output reg [3:0] data,
