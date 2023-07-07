@@ -13,7 +13,7 @@
  * Test bench para el módulo Counter
  */
 module Test_bench(
-	output reg clk, enb, rst,
+	output reg clk, enb,
 	output reg modo,
 	output reg [3:0] data,
 	input wire [3:0] Q);
@@ -32,7 +32,6 @@ module Test_bench(
 
 	    // Prueba 1 - Cuenta Ascendente 
         modo    = 1;
-        rst     = 1;
 		#3 enb  = 1;
 		#1 data = 0;
 		#3 modo = 0;

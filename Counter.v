@@ -79,7 +79,7 @@ endmodule
 
 
 module Counter(
-    input clk, enb, rst, // Señal de reloj, enable y reset
+    input clk, enb, // Señal de reloj, enable y reset
     input modo,
     input [3:0] data, // Valor de carga paralela
     output [3:0] Q // Salida del contador de 4 bits
@@ -87,17 +87,16 @@ module Counter(
 
     wire nand_a;
     wire nand_b;
-    wire nand_out;
+    wire nand_out_rst;
 
     assign nand_a = Q[0];
     assign nand_b = Q[1];
-    assign nand_out = rst;
 
     // Instancia del módulo Counter_4bits
     Counter_4bits counter_4bits(
-        .clk(clk),
-        .enb(enb),
-        .rst(nand_out),
+        .clk(clk), // entrada
+        .enb(enb), // entrada
+        .rst(nand_out_rst),
         .modo(modo),
         .data(data),
         .Q(Q)
@@ -107,7 +106,5 @@ module Counter(
     NAND nand_inst(
         .a(nand_a), // La entrada A es el bit 1 de la salida del contador
         .b(nand_b), // La entrada B es el bit 0 de la salida del contador
-        .y(nand_out)); // La salida se conecta a nand_out
-    
-
+        .y(nand_out_rst)); // La salida se conecta a nand_out
 endmodule
