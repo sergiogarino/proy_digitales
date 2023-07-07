@@ -25,7 +25,7 @@ module Counter_Tests(
 	initial
 	begin
 
-	    $dumpfile("contador4.vcd");
+	    $dumpfile("Counter.vcd");
 	    $dumpvars;
 
 		//Prubas para el contador de 4 bits
