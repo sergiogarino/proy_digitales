@@ -79,40 +79,35 @@ endmodule
 
 
 module Counter(
-    input wire clk, enb, rst, // Señal de reloj, enable y reset
-    input wire modo,
-    input wire [3:0] data, // Valor de carga paralela
-    output wire [3:0] Q // Salida del contador de 4 bits
-    //output reg [1:0] count // Salida del contador de 2 bits
+    input clk, enb, rst, // Señal de reloj, enable y reset
+    input modo,
+    input [3:0] data, // Valor de carga paralela
+    output [3:0] Q // Salida del contador de 4 bits
 );
+
     wire nand_a;
     wire nand_b;
-    wire nand_out; // Salida del módulo NAND
+    wire nand_out;
 
-    assign nand_a = count[0];
-    assign nand_b = count[1];
-
-    // Instancia del módulo NAND
-    NAND nand_inst(
-        .a(nand_a), // La entrada A es el bit 1 de la salida del contador
-        .b(nand_b), // La entrada B es el bit 0 de la salida del contador
-        .y(nand_out) // La salida se conecta a nand_out
-    );
+    assign nand_a = Q[0];
+    assign nand_b = Q[1];
+    assign nand_out = rst;
 
     // Instancia del módulo Counter_4bits
     Counter_4bits counter_4bits(
         .clk(clk),
         .enb(enb),
-        .rst(rst),
+        .rst(nand_out),
+        .modo(modo),
         .data(data),
         .Q(Q)
     );    
 
-    assign rst = nand_out; // La señal de reset se conecta a la salida del módulo NAND para resetear automáticamente el contador cuando llegue a 3 (11 en binario)
-
-    always @(posedge clk)
-    begin
-        count = Q;
-    end
+    // Instancia del módulo NAND
+    NAND nand_inst(
+        .a(nand_a), // La entrada A es el bit 1 de la salida del contador
+        .b(nand_b), // La entrada B es el bit 0 de la salida del contador
+        .y(nand_out)); // La salida se conecta a nand_out
+    
 
 endmodule
