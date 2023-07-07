@@ -17,7 +17,7 @@
 
 module Elevator (
     input Clk, Reset, /**< Entradas de Clock y Reset */
-    input IO, I1, I2, /**< Botones internos */
+    input I0, I1, I2, /**< Botones internos */
     input E0, E1, E2, /**< Botones externos */
     input S0, S1, S2, /**< Sensores de posición */ 
     input R, /**< Señal que se pone en alto cuando el tiempo para tener la puerta abierta expiró */
@@ -56,8 +56,8 @@ module Elevator (
 
     always @(posedge Clk, posedge Reset)
     begin
-        if (Reset) EstPres <= a;
-        else       EstPres <= ProxEst;
+        if (Reset) estadoPresente <= a;
+        else       estadoPresente <= proximoEstado;
     end
 
     /**
