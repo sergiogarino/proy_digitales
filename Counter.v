@@ -38,21 +38,29 @@ begin
 	
 	if (enb)
 	begin
-	
-		case(modo)
-			0: begin
-                Q = rst ? (Q+1):0;
-			end 
-		
-			1: begin
-				Q = data; // Inicializar mi contador con el valor de data.
-			end
-		
-			default: begin
-				Q = Q + 1;
-			end
-		
-		endcase
+    case(modo)
+        // Modo conteo
+        0: begin
+            if (~rst)
+            begin
+                Q <= 0;
+            end
+            else
+            begin
+                Q <= Q + 1;
+            end
+        end 
+
+        // Modo carga paralela
+        1: begin
+            Q <= data;		// Inicializar mi contador con el valor de data.
+        end
+    
+        default: begin
+            Q <= Q + 1;
+        end
+    
+    endcase
 	end
 	
 end
@@ -73,11 +81,23 @@ endmodule
 module Counter(
     input wire clk, enb, rst, // Señal de reloj, enable y reset
     input wire modo,
-    input [3:0] data, // Valor de carga paralela
-    input [3:0] Q, // Salida del contador de 4 bits
-    output [1:0] count // Salida del contador de 2 bits
+    input wire [3:0] data, // Valor de carga paralela
+    output wire [3:0] Q // Salida del contador de 4 bits
+    //output reg [1:0] count // Salida del contador de 2 bits
 );
+    wire nand_a;
+    wire nand_b;
     wire nand_out; // Salida del módulo NAND
+
+    assign nand_a = count[0];
+    assign nand_b = count[1];
+
+    // Instancia del módulo NAND
+    NAND nand_inst(
+        .a(nand_a), // La entrada A es el bit 1 de la salida del contador
+        .b(nand_b), // La entrada B es el bit 0 de la salida del contador
+        .y(nand_out) // La salida se conecta a nand_out
+    );
 
     // Instancia del módulo Counter_4bits
     Counter_4bits counter_4bits(
@@ -88,14 +108,11 @@ module Counter(
         .Q(Q)
     );    
 
-    // Instancia del módulo NAND
-    NAND nand_inst(
-        .a(count[0]), // La entrada A es el bit 1 de la salida del contador
-        .b(count[1]), // La entrada B es el bit 0 de la salida del contador
-        .y(nand_out) // La salida se conecta a nand_out
-    );
-
     assign rst = nand_out; // La señal de reset se conecta a la salida del módulo NAND para resetear automáticamente el contador cuando llegue a 3 (11 en binario)
 
+    always @(posedge clk)
+    begin
+        count = Q;
+    end
 
 endmodule

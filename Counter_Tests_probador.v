@@ -26,8 +26,8 @@ module probador();
 	wire clk, enb, rst;
 	wire modo;
 	wire [3:0] data, Q;
-  wire [1:0] count;
-Test_bench signals_generator(.clk(clk), .enb(enb), .rst(rst), .modo(modo), .data(data), .Q(Q), .count(count));
-Counter UUT(.clk(clk), .enb(enb), .rst(rst), .modo(modo), .data(data), .Q(Q), .count(count));
+    wire [1:0] count;
+    Test_bench signals_generator(.clk(clk), .enb(enb), .rst(rst), .modo(modo), .data(data), .Q(Q), .count(count));
+    Counter UUT(.clk(clk), .enb(enb), .rst(rst), .modo(modo), .data(data), .Q(Q), .count(count));
 
 endmodule
