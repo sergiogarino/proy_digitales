@@ -7,7 +7,7 @@
  * archivo: asm_ascensor.v
  * autores:
  * Sergio Garino Vargas - B73157
- * Johan - 
+ * Johan Herrera Chaves - C03811
  *
  * Descripción: 
  * Test bench para el módulo Counter

@@ -7,7 +7,7 @@
  * archivo: Counter.v
  * autores:
  * Sergio Garino Vargas - B73157
- * Johan - 
+ * Johan Herrera Chaves - C03811
  *
  * Descripción: 
  * Modulo Counter capaz de contar de 0 a 3 con base en un contador de 4 bits 

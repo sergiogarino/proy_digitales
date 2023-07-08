@@ -7,12 +7,22 @@
  * archivo: asm_ascensor.v
  * autores:
  * Sergio Garino Vargas - B73157
- * Johan - 
+ * Johan Herrera Chaves - C03811
  *
  * Descripción: 
  * En este archivo se tiene la implemetación del Diagrama ASM del 
  * ascensor.
  */
+
+/** IMPORTANTE!!!!!!!!!!
+* Para correr este tench se deben de poner los siguientes comandos en una
+* terminal Linux que tenga instalada iverilog, vvp y gtkwave
+***************************************************
+iverilog -o ElevadorPrueba Elevator_Tests.v
+vvp ElevadorPrueba
+gtkwave Elevator.vcd
+***************************************************
+**/
 
 
 module Elevator (
@@ -39,16 +49,16 @@ module Elevator (
     parameter b = 4'b0001; // 1
     parameter c = 4'b0010; // 2
     parameter d = 4'b0011; // 3
-    parameter e = 4'b1100; // 12
+    parameter e = 4'b1100; // C
     parameter f = 4'b0100; // 4
     parameter g = 4'b0101; // 5
     parameter h = 4'b0110; // 6
     parameter i = 4'b0111; // 7
     parameter j = 4'b1000; // 8
     parameter k = 4'b1001; // 9
-    parameter p = 4'b1010; // 10
-    parameter u = 4'b1011; // 11
-    parameter t = 4'b1101; // 13
+    parameter p = 4'b1010; // A
+    parameter u = 4'b1011; // B
+    parameter t = 4'b1101; // D
 
     /**
      * La memoria de estados
