@@ -11,6 +11,7 @@
  *
  * Descripción: 
  * Test bench para el módulo Counter
+ * This is a test to verify that GH is working
  */
 
 
